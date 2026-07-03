@@ -45,7 +45,7 @@ ollama list
 2. リポジトリをクローンします。
 
 ```powershell
-git clone https://github.com/<your-account>/realtime-translation-overlay.git
+git clone https://github.com/oshimachihiro/realtime-translation-overlay.git
 ```
 
 3. クローンしたディレクトリに移動します。
@@ -75,6 +75,7 @@ python -m pip install -r requirements.txt
 7. アプリケーションを起動します。
 
 ```powershell
+cd src
 python main.py
 ```
 
