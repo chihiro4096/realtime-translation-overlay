@@ -1,0 +1,62 @@
+{
+  "_comment": "Dolphin リアルタイム翻訳オーバーレイ 設定ファイル",
+  "_comment_color": "色はすべて '#RRGGBB' または '#AARRGGBB' 形式（AAは不透明度 00=透明 FF=不透明）",
+  "target_window": {
+    "_comment": "キャプチャ対象ウィンドウのタイトルに含まれるキーワード（部分一致）",
+    "window_title_keyword": "YouTube",
+    "window_search_interval_ms": 3000
+  },
+  "capture": {
+    "_comment": "Dolphinウィンドウ内の、テキストが表示されるサブ領域をウィンドウ相対座標で指定",
+    "_comment2": "ゲーム画面全体を対象にする場合は crop_region を null に設定",
+    "crop_region": null,
+    "capture_interval_ms": 500
+  },
+  "ocr": {
+    "_comment": "Windows Media OCR の言語設定（'en-US', 'ja-JP' など BCP-47 タグ）",
+    "language": "en-US",
+    "_comment2": "前回OCR結果との差分判定ヒステリシス上限。類似度がこの値以上なら同一テキストと見なしスキップ",
+    "similarity_threshold": 0.95,
+    "_comment2b": "ヒステリシス下限。類似度がこの値未満なら大幅変化として即 emit（0.80 推奨）",
+    "similarity_lower_threshold": 0.8,
+    "_comment2c": "グレーゾーン（下限以上・上限未満）で同一テキストが何フレーム連続したら確定 emit するか（2 推奨）",
+    "text_confirm_frames": 3,
+    "_comment3": "空間クラスタリングのギャップ閾値（キャプチャ幅に対する比率）。値を小さくすると隣接パネルが分離されやすくなる",
+    "cluster_gap_ratio": 0.1,
+    "_comment4": "Y軸クラスタリング閾値（キャプチャ高さ比率）。縦方向に離れた要素を別クラスターに分離する（0.08=1080pで約86px相当）",
+    "cluster_y_gap_ratio": 0.08
+  },
+  "translation": {
+    "_comment": "Ollama のエンドポイント。ローカル以外のサーバーに向ける場合はURLを変更",
+    "ollama_url": "http://localhost:11434/api/generate",
+    "_comment2": "使用するモデル名。'ollama list' で確認できる名前を入力",
+    "model_name": "qwen2.5:1.5b",
+    "request_timeout_sec": 15,
+    "_comment3": "翻訳キャッシュの最大保持エントリ数",
+    "cache_max_size": 200,
+    "_comment4": "翻訳プロンプト。{text}が原文に置換される。指示はtranslator.pyのsystemフィールドで管理するため、ここはそのまま{text}推奨。",
+    "prompt_template": "Translate ALL of the following text into Japanese. Output ONLY the translation, preserving line breaks exactly. Do NOT omit, summarize, or add any content. If a segment cannot be translated (e.g. a URL, number, or code), copy it as-is.\n\n{text}"
+  },
+  "overlay": {
+    "_comment": "オーバーレイウィンドウの表示スタイル",
+    "font_family": "Yu Gothic UI",
+    "font_size_pt": 14,
+    "font_color": "#FFFFFF",
+    "background_color": "#CC000000",
+    "_comment2": "原文テキストのBoundingBoxの下端から何ピクセル下にポップアップを表示するか",
+    "popup_offset_y_px": 8,
+    "_comment3": "ポップアップの左右内側余白（パディング）",
+    "padding_x_px": 10,
+    "padding_y_px": 6,
+    "_comment4": "翻訳結果を何秒間表示し続けるか（0 = 次の翻訳が来るまで表示し続ける）",
+    "display_duration_sec": 0,
+    "_comment5": "オーバーレイウィンドウを常に最前面に表示するか",
+    "always_on_top": true
+  },
+  "debug": {
+    "_comment": "true にするとキャプチャ画像・OCR結果をコンソールに出力する",
+    "verbose_logging": false,
+    "_comment2": "true にするとキャプチャ画像を captures/ フォルダに保存する（デバッグ用）",
+    "save_captures": false
+  }
+}
