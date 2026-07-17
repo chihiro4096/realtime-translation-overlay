@@ -1081,7 +1081,7 @@ class SystemTrayIcon(QSystemTrayIcon):
         self._app = app
 
         self.setIcon(self._make_icon())
-        self.setToolTip("Dolphin リアルタイム翻訳オーバーレイ")
+        self.setToolTip("リアルタイム翻訳オーバーレイ")
 
         self._menu = QMenu()
 
@@ -1241,7 +1241,7 @@ def main() -> None:
     config = load_config()                              # ①
     _setup_logging(verbose=config.debug.verbose_logging) # ②
     logger.info("═" * 60)
-    logger.info("Dolphin リアルタイム翻訳オーバーレイ 起動中…")
+    logger.info("リアルタイム翻訳オーバーレイ 起動中…")
     logger.info("  対象ウィンドウ       : %s", config.target_window.window_title_keyword)
     logger.info("  翻訳モデル           : %s", config.translation.model_name)
     logger.info("  Ollama エンドポイント: %s", config.translation.ollama_url)

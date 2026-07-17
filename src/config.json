@@ -30,12 +30,12 @@
     "_comment": "Ollama のエンドポイント。ローカル以外のサーバーに向ける場合はURLを変更",
     "ollama_url": "http://localhost:11434/api/generate",
     "_comment2": "使用するモデル名。'ollama list' で確認できる名前を入力",
-    "model_name": "qwen2.5:1.5b",
+    "model_name": "qwen2.5:3b",
     "request_timeout_sec": 15,
     "_comment3": "翻訳キャッシュの最大保持エントリ数",
     "cache_max_size": 200,
     "_comment4": "翻訳プロンプト。{text}が原文に置換される。指示はtranslator.pyのsystemフィールドで管理するため、ここはそのまま{text}推奨。",
-    "prompt_template": "Translate ALL of the following text into Japanese. Output ONLY the translation, preserving line breaks exactly. Do NOT omit, summarize, or add any content. If a segment cannot be translated (e.g. a URL, number, or code), copy it as-is.\n\n{text}"
+    "prompt_template": "Translate the following English text to Japanese. Preserve character names, proper nouns, and place names as-is (do not phonetically transliterate them) if you are not confident of their correct Japanese reading. Output only the translated text, no explanations.\n\n{text}"
   },
   "overlay": {
     "_comment": "オーバーレイウィンドウの表示スタイル",
