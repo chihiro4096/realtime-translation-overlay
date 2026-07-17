@@ -98,11 +98,6 @@ cd src
 python main.py
 ```
 
-#### おまけ：自分でexe化する
-
-```powershell
-python -m PyInstaller overlay.spec
-```
 
 ## 4. トラブルシューティング
 
