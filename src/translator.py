@@ -288,7 +288,7 @@ class TranslatorWorker(QThread):
                 timeout=self.config.translation.request_timeout_sec,
             )
 
-            print(f"[DEBUG-TRANS] 翻訳完了! Ollamaの生出力: {repr(translated)}")
+            logger.debug("翻訳完了! Ollamaの生出力: %s", repr(translated))
 
             if translated:
                 self._cache.set(text, translated)
@@ -342,18 +342,19 @@ async def _call_ollama(
       - `stop` リスト: よくある「英語への逃げ」パターンを打ち切る
     """
     # システムプロンプト: 役割と出力制約を明確に分離
-    system_prompt = (
-        "You are a professional Japanese translator. "
-        "Your only job is to translate the English text given by the user into natural Japanese. "
-        "Rules you MUST follow:\n"
-        "1. Output ONLY the Japanese translation. Nothing else.\n"
-        "2. Do NOT write English words in your response.\n"
-        "3. Do NOT add any explanation, notes, or preamble.\n"
-        "4. Do NOT repeat the original English text.\n"
-        "5. If the input is a single word, translate just that word.\n"
-        "6. Keep all Arabic numerals as-is. Do NOT convert them to kanji or "
-        "Japanese number words. For example: '3' stays '3', not '三' or 'さん'."
-    )
+    # system_prompt = (
+    #     "You are a professional Japanese translator. "
+    #     "Your only job is to translate the English text given by the user into natural Japanese. "
+    #     "Rules you MUST follow:\n"
+    #     "1. Output ONLY the Japanese translation. Nothing else.\n"
+    #     "2. Do NOT write English words in your response.\n"
+    #     "3. Do NOT add any explanation, notes, or preamble.\n"
+    #     "4. Do NOT repeat the original English text.\n"
+    #     "5. If the input is a single word, translate just that word.\n"
+    #     "6. Keep all Arabic numerals as-is. Do NOT convert them to kanji or "
+    #     "Japanese number words. For example: '3' stays '3', not '三' or 'さん'."
+    # )
+    system_prompt = ""
 
     payload = {
         "model":  model,
@@ -361,9 +362,11 @@ async def _call_ollama(
         "prompt": prompt,          # ← 翻訳対象テキストのみ。指示は system に分離。
         "stream": False,
         "options": {
-            "temperature": 0.0,    # 完全決定論的（同一入力から常に同一出力）
-            "num_predict": 300,
-            "repeat_penalty": 1.1,
+            "temperature": 0.7,    # 完全決定論的（同一入力から常に同一出力）
+            "top_p": 0.6,
+            "top_k": 20,
+            "num_predict": 4096,
+            "repeat_penalty": 1.05,
             # 英語の「続き生成」が始まったら打ち切るストップワード
             "stop": [
                 "\n\n", "Translation:", "Note:", "In Japanese:",

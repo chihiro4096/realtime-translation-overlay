@@ -187,15 +187,14 @@ class OcrConfig:
 @dataclass
 class TranslationConfig:
     ollama_url: str          = "http://localhost:11434/api/generate"
-    model_name: str          = "qwen2.5:3b"
+    model_name: str          = "kaelri/hy-mt2:1.8b-q4_K_M"
     request_timeout_sec: int = 15
     cache_max_size: int      = 200
     prompt_template: str     = (
-        "Translate the following English text to Japanese. "
-        "Preserve character names, proper nouns, and place names as-is "
-        "(do not phonetically transliterate them) if you are not confident "
-        "of their correct Japanese reading. "
-        "Output only the translated text, no explanations.\n\n{text}"
+        "Translate the following segment into Japanese, without additional "
+        "explanation. Preserve character names, proper nouns, and place "
+        "names as-is if you are not confident of their correct Japanese "
+        "reading.\n\n{text}"
     )
 
 
