@@ -31,11 +31,11 @@ Windows標準のOCRエンジンを使用するため、読み取りたい言語�
 
 翻訳にはローカルLLMランタイム「Ollama」が必要です。以下の手順で事前に準備してください。
 
-1. [Ollama公式サイト](https://ollama.com/download) にアクセスし、Windows版のインストーラーをダウンロードして実行します。
+1. [Ollama公式サイト](https://ollama.com/download) にアクセスし、Windows版のインストーラーをダウンロードして実行します。Hy-MT2モデルの動作には比較的新しいバージョンが必要です。
 2. インストール完了後、コマンドプロンプトまたはPowerShellを開き、以下のコマンドを実行して翻訳用モデルをダウンロードします。
 
 ```powershell
-ollama pull qwen2.5:3b
+ollama pull kaelri/hy-mt2:1.8b-q4_K_M
 ```
 
 3. ダウンロードが完了すれば準備は完了です。以下のコマンドでモデルが一覧に表示されることを確認できます。
@@ -101,6 +101,10 @@ python main.py
 
 ## 4. トラブルシューティング
 
+### アプリ起動直後、最初の字幕だけ表示されないことがある
+
+Ollamaがモデルを初めてメモリに読み込む際、数十秒程度の時間がかかることがあります。起動直後の翻訳リクエストがこの読み込み時間に間に合わずタイムアウトする場合がありますが、これは一時的なもので、それ以降は問題なく動作します。
+
 ### 画面に赤字で `Client error '404 Not Found' for url 'http://localhost:11434/api/generate'` と表示される
 
 `config.json` の `translation.model_name` に指定されているモデルが、Ollamaにダウンロード（pull）されていないことが原因です。以下のコマンドで、現在ダウンロード済みのモデル一覧を確認してください。
@@ -112,7 +116,7 @@ ollama list
 一覧にモデルが存在しない場合は、以下のコマンドで改めてダウンロードしてください。
 
 ```powershell
-ollama pull qwen2.5:3b
+ollama pull kaelri/hy-mt2:1.8b-q4_K_M
 ```
 
 ### 別のモデルを使いたい
