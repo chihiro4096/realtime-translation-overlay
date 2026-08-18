@@ -133,7 +133,7 @@ ollama pull kaelri/hy-mt2:1.8b-q4_K_M
 
 初期設定では、翻訳対象のウィンドウ全体をキャプチャします。気になる場合は、`config.json` の `capture.crop_region` を設定することで、キャプチャする範囲をウィンドウ内の一部分だけに絞り込めます。`overlay.exe` と同じフォルダに生成されている `config.json` をテキストエディタで開き、以下のように編集してください。
 
-\`\`\`json
+```json
 "capture": {
     "crop_region": {
         "left_ratio": 0.0,
@@ -143,7 +143,7 @@ ollama pull kaelri/hy-mt2:1.8b-q4_K_M
     },
     "capture_interval_ms": 500
 }
-\`\`\`
+```
 
 各値は、ウィンドウ全体を `0.0`（左端・上端）〜`1.0`（右端・下端）とした比率で指定します。
 
