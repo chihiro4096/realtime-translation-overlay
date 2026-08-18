@@ -31,7 +31,7 @@
     "ollama_url": "http://localhost:11434/api/generate",
     "_comment2": "使用するモデル名。'ollama list' で確認できる名前を入力",
     "model_name": "kaelri/hy-mt2:1.8b-q4_K_M",
-    "request_timeout_sec": 15,
+    "request_timeout_sec": 120,
     "_comment3": "翻訳キャッシュの最大保持エントリ数",
     "cache_max_size": 200,
     "_comment4": "翻訳プロンプト。{text}が原文に置換される。Hy-MT2は公式にsystem_promptを持たない設計のため、指示はここに集約する（translator.pyのsystemは空文字）。",
