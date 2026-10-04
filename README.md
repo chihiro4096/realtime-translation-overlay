@@ -64,7 +64,7 @@ ollama list
 2. リポジトリをクローンします。
 
 ```powershell
-git clone https://github.com/oshimachihiro/realtime-translation-overlay.git
+git clone https://github.com/chihiro4096/realtime-translation-overlay.git
 ```
 
 3. クローンしたディレクトリに移動します。
